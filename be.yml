@@ -1,0 +1,10 @@
+services:
+ backend:
+   container_name: literature-be
+   image: malikalrk/literature-be
+   stdin_open: true
+   ports:
+     - 5000:5000
+     - 5001:5000
+
+
