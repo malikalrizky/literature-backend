@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+ backend:
+   build: .
+   container_name: be
+   image: malikalrk/literature-be:latest
+   stdin_open: true
+   ports:
+    - 5001:5000
