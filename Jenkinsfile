@@ -1,11 +1,11 @@
 def branch = "production"
 def remoteurl = "https://github.com/malikalrizky/literature-backend.git"
 def remotename = "jenkins"
-def dir = "~/literature-frontend/"
-def ip = "103.186.0.248"
+def dir = "~/literature-backend/"
+def ip = "malikal@103.186.0.248"
 def username = "malikal"
 def image = "malikalrk/literature-be:latest"
-def key = "app-key"
+def key = "github"
 def compose = "be.yml"
 
 pipeline {
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sshagent(credentials: ["${key}"]) {
                     sh """
-                        ssh -l ${username} ${ip} <<pwd
+                        ssh -o StrictHostKeyChecking=no ${ip} <<pwd
                         cd ${dir}
                         git remote add ${remotename} ${remoteurl} || git remote set-url ${remotename} ${remoteurl}
                         git pull ${remotename} ${branch}
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sshagent(credentials: ["${key}"]) {
                     sh """
-                        ssh -l ${username} ${ip} <<pwd
+                        ssh -o StrictHostKeyChecking=no ${ip} << pwd
                         cd ${dir}
                         docker build -t ${image} .
                         pwd
@@ -43,7 +43,7 @@ pipeline {
             steps {
                 sshagent(credentials: ["${key}"]) {
                     sh """
-                        ssh -l ${username} ${ip} <<pwd
+                        ssh -o StrictHostKeyChecking=no ${ip} << pwd
                         cd ${dir}
                         // docker compose -f ${compose} down
                         docker compose -f ${compose} up -d
@@ -57,7 +57,7 @@ pipeline {
             steps {
                 sshagent(credentials: ["${key}"]) {
                     sh """
-                        ssh -l ${username} ${ip} <<pwd
+                        ssh -o StrictHostKeyChecking=no ${ip} << pwd
                         docker image push ${image}
                         docker image prune -f --all
                         pwd
@@ -65,6 +65,5 @@ pipeline {
                 }
             }
         }
-
     }
 }
