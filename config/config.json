@@ -1,10 +1,10 @@
 {
   "development": {
-    "username": "malik",
-    "password": "P4ssword",
-    "database": "database",
-    "host": "10.71.15.115",
-    "dialect": "postgresql"
+    "username": "root",
+    "password": "root",
+    "database": "literature",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
@@ -14,10 +14,8 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "malik",
-    "password": "P4ssword",
-    "database": "database",
-    "host": "10.71.15.115",
-    "dialect": "postgresql"
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres",
+    "protocol": "postgres"
   }
 }
