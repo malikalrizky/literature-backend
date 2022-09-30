@@ -69,8 +69,8 @@ pipeline {
         stage('Send Success Notification') {
             steps {
                 sh """
-                    curl -X POST 'https://api.telegram.org/bot${env.telegram>
-                    'chat_id=${env.telegramid}&text=Build ID #${env.BUILD_ID>
+                    curl -X POST 'https://api.telegram.org/bot${env.telegramapi}/sendMessage' -d \
+		    'chat_id=${env.telegramid}&text=Build ID #${env.BUILD_ID} Frontend Pipeline Successful!'
                 """
             }
         }
